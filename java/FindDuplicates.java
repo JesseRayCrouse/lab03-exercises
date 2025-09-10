@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class FindDuplicates {
 
@@ -16,6 +18,20 @@ public class FindDuplicates {
 		return duplicates;
     }
 
+    public static List<Integer> findDuplicatesHashMap(List<Integer> l) {
+        Map<Integer, Integer> countMap = new HashMap<>();
+        List<Integer> duplicates = new ArrayList<>();
+        for (Integer num : l) {
+            countMap.put(num, countMap.getOrDefault(num, 0) + 1);
+        }
+        for (Map.Entry<Integer, Integer> entry : countMap.entrySet()) {
+            if (entry.getValue() > 1) {
+                duplicates.add(entry.getKey());
+            }
+        }
+        return duplicates;
+    }
+
     public static void main(String[] args) {
         // some test strings:
         List<Integer> sample1 = new ArrayList<Integer>(Arrays.asList(3, 7, 5, 6, 7, 4, 8, 5, 7, 66));
@@ -26,8 +42,14 @@ public class FindDuplicates {
         System.out.println("Sample 2: " + findDuplicatesNestedLoops(sample2));
         System.out.println("Sample 3: " + findDuplicatesNestedLoops(sample3));
         System.out.println("Sample 4: " + findDuplicatesNestedLoops(sample4));
-    }
+        System.out.println(" ");
 
+        System.out.println("Sample 1: " + findDuplicatesHashMap(sample1));
+        System.out.println("Sample 2: " + findDuplicatesHashMap(sample2));
+        System.out.println("Sample 3: " + findDuplicatesHashMap(sample3));
+        System.out.println("Sample 4: " + findDuplicatesHashMap(sample4));
+    }
+    
 }
 
 
